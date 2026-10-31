@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 — 2026-11-01
+
+- Claude Code asks for all five 3DJ scopes at the first sign-in (`oauth.scopes` in `.mcp.json`), so later tools don't stall on a missing scope.
+- Directory listing fields in `plugin.json`: icon, documentation, support, privacy and terms URLs.
+
 ## 0.2.0 — 2026-10-31
 
 - Uses 3DJ's new server tools: `cad_export_model` returns real STL, STEP, GLB or per-part ZIP files for B-Rep parts, and `cad_save_model` saves a part to the gallery with a workbench reopen link (also the path to a print quote). Skills choose the export format by destination and tell people that export links are public to anyone who has them.

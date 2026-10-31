@@ -1,7 +1,7 @@
 {
   "name": "3dj-studio",
   "displayName": "3DJ Studio",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "3DJ as the live CAD bench of the Neuraldeep Design Studio: make printable parts, design objects through compared concepts, and get parts print-ready, with a free local compile, measure and preview bench.",
   "author": {
     "name": "Neural Deep Network Ltd",
@@ -22,5 +22,9 @@
     "step",
     "design-studio"
   ],
-  "privacyPolicyUrl": "https://www.3dj.app/privacy"
+  "privacyPolicyUrl": "https://www.3dj.app/privacy",
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://github.com/NeuralDEEPnet/3dj-claude-plugin#readme",
+  "supportUrl": "https://www.3dj.app/support",
+  "termsOfServiceUrl": "https://www.3dj.app/terms"
 }
