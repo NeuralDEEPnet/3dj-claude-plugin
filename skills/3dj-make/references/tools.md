@@ -1,10 +1,10 @@
 # 3DJ tools, routes and limits
 
-Verified against the 3DJ MCP server (v1.1, 18 tools, endpoint `https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`). The live tool list is authoritative: if it differs from this page, follow the live schemas and never invent a tool.
+Verified against the live 3DJ MCP server on 31 October 2026 (21 tools, 5 of them public; endpoint `https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`). The live tool list is authoritative: if it differs from this page, follow the live schemas and never invent a tool.
 
 ## How the tools appear
 
-The same 18 tools can reach this session three ways. Use whichever is present; the arguments are identical.
+The same tools can reach this session three ways. Use whichever is present; the arguments are identical.
 
 | Route | Tool names look like | Notes |
 |---|---|---|
@@ -22,6 +22,7 @@ Tool calls may be deferred: load them through the session's tool search before t
 | `cad_get_starters` | `category?` (e.g. `enclosure`, `mating`, `fastener`) | 18 Replicad/OpenCascade B-Rep starter scripts with `Param.*` declarations, plus the full DSL reference (`dslReference`). |
 | `cad_validate_script` | `code` | Syntax, safety and parameter check of a B-Rep script; the live server may also build the solid and return `buildValidation` / `measuredGeometry` (bodies, size, volume, bed fit). Never creates a file. |
 | `cad_get_evidence_schema` | — | The Design Evidence Pack v1 gates: watertight, 0.8 mm nozzle-safe wall, 1.2 mm recommended wall, 45° overhang, 220 × 220 × 250 mm bed, PLA 1.24 g/cm³, evidence labels. |
+| `compose_design_brief` | `code`, `parameters?`, `productName?`, `intendedUse?`, `material?`, `finish?`, `colour?`, `style?` | Builds and measures a B-Rep script and returns import steps for Blender, FreeCAD, Fusion 360, Onshape and slicers, plus a render brief. Renders, sends and saves nothing. |
 
 ## Account tools — OAuth sign-in (or a per-user API key in hosts that use headers)
 
@@ -29,6 +30,8 @@ Tool calls may be deferred: load them through the session's tool search before t
 |---|---|---|
 | `openscad_compile_model` | `code`, `parameters?` {name: number}, `buildVolumeMm?` [x,y,z] | Real OpenSCAD (Manifold) in an isolated worker: effective source, clamped parameter values, triangle count, closed-mesh check, bounding box, printer fit. 20/hour, 100/day. Creates **no** STL and no gallery record. |
 | `cad_list_models` | `limit?` 1–100 | The user's saved parametric and photo-CAD models with script source and parameter values. |
+| `cad_export_model` | `code`, `parameters?`, `format?` (`stl` default, `step`, `glb`, `zip`), `partName?`, `name?` | Builds a B-Rep script in 3DJ's server kernel, measures every body and writes a real file: binary STL, ISO 10303 STEP, GLB (one named, coloured node per part) or a ZIP of per-part STLs with a BOM. Returns `downloadUrl`, `sha256`, sizes, volumes and import steps. 30/hour, 150/day. **The download link is reachable by anyone who has it.** No gallery record. |
+| `cad_save_model` | `code`, `name`, `parameters?`, `summary?` | Builds the script, checks it is closed, and saves it to the user's gallery as an editable model with an STL. Returns `modelId`, `downloadUrl` and `openUrl` (reopens it in the workbench with these parameters). 20/hour, 100/day. Needed before a print quote request. |
 | `list_providers` | `force?` | Health of each generation backend, supported inputs, remaining hourly/daily generation allowance. |
 | `generate_from_text` | `prompt`, `negativePrompt?` | Starts an asynchronous concept mesh (used by the separate 3dj-concept plugin). Returns `modelId`, `status: "processing"`. Uses allowance. |
 | `generate_from_image_url` | `imageUrl` (public HTTPS, ≤ 12 MB), `name?` | Image-to-3D. Same polling. |
@@ -53,11 +56,12 @@ Tool calls may be deferred: load them through the session's tool search before t
 | Purpose | Link |
 |---|---|
 | Open the workbench (OpenSCAD and B-Rep editors, STEP/STL export, gallery save) | `https://www.3dj.app/workspace` |
+| Reopen a saved model | `https://www.3dj.app/workspace?model=<modelId>` (`cad_save_model` returns it as `openUrl`) |
 | Open a generated mesh in the viewer | `https://www.3dj.app/workspace?modelUrl=<URL-encoded downloadUrl>` |
 | Start image-to-3D from a reference image (e.g. a product render) | `https://www.3dj.app/workspace?ref=<URL-encoded image URL>` |
 | Mint a per-user API key (CLI and header-based hosts) | `https://www.3dj.app/agents` |
 
-There is no deep link that loads source code: for OpenSCAD or B-Rep scripts, tell the person to open the workbench, pick the matching editor and paste the file.
+Unsaved source has no deep link: for an OpenSCAD script, or a B-Rep script the person doesn't want saved, tell them to open the workbench, pick the matching editor and paste the file.
 
 ## The free local bench
 

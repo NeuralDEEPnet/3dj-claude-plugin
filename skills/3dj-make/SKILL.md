@@ -26,7 +26,7 @@ Go from request to a parametric part the person can see, adjust by name and prin
 | The person needs | Use |
 |---|---|
 | A printable part, quick iterations, STL | OpenSCAD + bench (default) |
-| STEP for other CAD or CNC, true edge fillets, mating assemblies with standard hardware | 3DJ B-Rep — follow `references/brep-cad.md` |
+| STEP for other CAD or CNC, true edge fillets, mating assemblies with standard hardware, or a part saved to the 3DJ gallery | 3DJ B-Rep — follow `references/brep-cad.md`; with an account, `cad_export_model` returns real STL, STEP or GLB files and `cad_save_model` saves the part |
 | Organic, sculptural, character, "make this photo 3D" | the 3dj-concept skill if it is installed; otherwise sculpt with the cookbook's pebble, lathe, twist and faceted patterns |
 
 ## 3 · Model it
@@ -54,7 +54,7 @@ Use the person's printer for `--bed` and their material for `--density` (PLA 1.2
 
 Lead with the views image — it is the answer. Then, briefly:
 
-- **Files**: the `.scad` (source of truth), the `.stl`, the views and check images. In a chat app with a send-file tool, send them; in a terminal or IDE, give the paths.
+- **Files**: the `.scad` (source of truth), the `.stl`, the views and check images. In a chat app with a send-file tool, send them; in a terminal or IDE, give the paths. For a B-Rep part, the files are the ones `cad_export_model` returned (say that its links are public to anyone holding them).
 - **Knobs** — a small table the person can act on by name:
 
   | Knob | Now | Range | What it changes |

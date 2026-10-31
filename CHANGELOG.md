@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0 — 2026-10-31
+
+- Uses 3DJ's new server tools: `cad_export_model` returns real STL, STEP, GLB or per-part ZIP files for B-Rep parts, and `cad_save_model` saves a part to the gallery with a workbench reopen link (also the path to a print quote). Skills choose the export format by destination and tell people that export links are public to anyone who has them.
+- Tool reference updated to the live 21-tool catalogue (5 public), including `compose_design_brief` and the `/workspace?model=<id>` reopen link.
+
 ## 0.1.0 — 2026-10-31
 
 First release of 3DJ Studio, the CAD bench of the Neuraldeep Design Studio.

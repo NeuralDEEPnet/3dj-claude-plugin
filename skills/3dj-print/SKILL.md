@@ -36,7 +36,7 @@ Three gates stay separate, and none is implied by another:
 Steps:
 
 1. `get_account_status` → check sign-in and `printQuoteRequestsOpen`.
-2. The quote needs a **completed saved model in the person's 3DJ gallery**. A local `.scad` or `.stl` is not one: the person opens `https://www.3dj.app/workspace`, pastes the OpenSCAD source (or imports the file), and saves it. Then find it with `list_my_models` / `cad_list_models`.
+2. The quote needs a **completed saved model in the person's 3DJ gallery**. A B-Rep script can be saved directly with `cad_save_model` (it returns the `modelId`). A local `.scad` or `.stl` is not a saved model: the person opens `https://www.3dj.app/workspace`, pastes the OpenSCAD source (or imports the file), and saves it. Then find it with `list_my_models` / `cad_list_models`.
 3. When requests are open and the person asks to submit, collect `modelId`, `dimensionsMm`, `material`, `colour`, `quantity` (1–100), `destinationCountry` (two letters), `destinationRegion` (city or postal region only — never a street address), `intendedUse`, optional `notes`, and call `request_print_quote` with a new `requestKey` (e.g. `print-phone-stand-001`; reuse it only for an identical retry). Report the request id, `pending_review` status, and that no payment is due now.
 4. When requests are closed, say so and give a manufacturing brief the person can keep or email to 3d@neuraldeep.net: model, revision, dimensions, material, colour, quantity, use, region, and the bench findings.
 5. `list_print_requests` for status and operator notes. `cancel_print_request` only when the person asks.

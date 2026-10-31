@@ -20,7 +20,7 @@ Skills also start on their own when a request matches.
 
 | Component | Purpose |
 |---|---|
-| `3dj` MCP server | The 3DJ service (`https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`): OpenSCAD and B-Rep CAD starters, script validation, OpenSCAD compile and measure, your saved models and downloads, print quote requests |
+| `3dj` MCP server | The 3DJ service (`https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`): OpenSCAD and B-Rep CAD starters, script validation, OpenSCAD compile and measure, STL/STEP/GLB export and gallery saves for B-Rep parts, your saved models and downloads, print quote requests |
 | `3dj-make` skill | Functional printable parts; holds the bench and shared references (3DJ tools, OpenSCAD rules, B-Rep CAD, print gates, form cookbook) |
 | `3dj-design` skill | The studio flow with compared directions |
 | `3dj-print` skill | Print-readiness, orientation and operator quote reviews |
@@ -31,7 +31,7 @@ Text- and image-to-3D concept meshes are a separate plugin, `3dj-concept`, in th
 ## Free versus account
 
 - **Free, no account**: the local bench, and 3DJ's public tools — OpenSCAD and B-Rep starters, script validation, the evidence schema.
-- **With a 3DJ account** (OAuth sign-in): hosted OpenSCAD compile (20 per hour, 100 per day), your gallery and downloads, and print quote requests.
+- **With a 3DJ account** (OAuth sign-in): hosted OpenSCAD compile (20 per hour, 100 per day), real STL, STEP and GLB exports of B-Rep parts (30 per hour), saving parts to your gallery, your downloads, and print quote requests.
 
 Sign in when a skill asks: in Claude Code run `/mcp`, choose **3dj**, then **Authenticate**; in the Claude app use Settings → Connectors → 3dj. Never paste keys into chat.
 
@@ -51,7 +51,7 @@ It reads `.scad`, `.stl` and `.glb`, and writes a views sheet, a colour-coded pr
 
 - **Runs locally**: the bench (`skills/3dj-make/scripts/bench.mjs`, readable source, MIT). It reads the model files you point it at and writes its images, STL and report next to them. It sends nothing anywhere.
 - **Fetches once, with your agreement**: `bench.mjs setup` downloads the OpenSCAD WebAssembly engine, `openscad-wasm-prebuilt` 1.2.0 (about 11 MB, OpenSCAD is GPL-2.0), from the public npm registry into `~/.cache/3dj-bench`, with install scripts disabled, and refuses to use it unless its SHA-512 matches the hash pinned in the script. Claude asks before running it. Nothing else is downloaded.
-- **Sends to 3DJ, only when a 3DJ tool is called**: the OpenSCAD or CAD script source and parameters you ask it to compile or validate, the model ids you ask about, and, for a quote request, the model, dimensions, material, colour, quantity, intended use and destination country and region (never a street address or payment details). 3DJ's handling of that data is described in its [privacy policy](https://www.3dj.app/privacy).
+- **Sends to 3DJ, only when a 3DJ tool is called**: the OpenSCAD or CAD script source and parameters you ask it to compile, validate, export or save, the model ids you ask about, and, for a quote request, the model, dimensions, material, colour, quantity, intended use and destination country and region (never a street address or payment details). Exported files are stored by 3DJ and their download links work for anyone who has them; saved parts go to your gallery. 3DJ's handling of that data is described in its [privacy policy](https://www.3dj.app/privacy).
 - **No telemetry**, no credentials read from your machine, and no other network destinations.
 
 ## Privacy
