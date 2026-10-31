@@ -1,0 +1,18 @@
+{
+  "name": "3dj",
+  "owner": {
+    "name": "Neural Deep Network Ltd",
+    "email": "3d@neuraldeep.net"
+  },
+  "metadata": {
+    "description": "3DJ for Claude: parametric CAD, a free local compile-measure-preview bench, and print checks, by Neural Deep Network Ltd."
+  },
+  "plugins": [
+    {
+      "name": "3dj-studio",
+      "source": "./",
+      "description": "3DJ as the live CAD bench of the Neuraldeep Design Studio: make printable parts, design objects through compared concepts, and get parts print-ready, with a free local compile, measure and preview bench.",
+      "version": "0.1.0"
+    }
+  ]
+}
