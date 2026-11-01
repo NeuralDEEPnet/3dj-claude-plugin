@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2 — 2026-11-01
+
+- Matches 3DJ's server update of 1 November: `cad_validate_script` always builds and measures the solid, so the skills no longer hedge on it, and the free building tools' limits are documented (per-address without an account, 90 builds an hour and 500 a day with one).
+- B-Rep reference covers the new language: `placeAt` joints driven by a parameter, involute gears and belt drives, sweeps along 3D curves and constraint-solved sketches, with a second live-validated example (a parametric gear pair). Notes that `partName` must match the part names the build reports.
+- `cad_get_starters` filtering explained (matched against id, title and summary; 19 starters, including the new hinged-lid enclosure).
+
 ## 0.2.1 — 2026-11-01
 
 - Claude Code asks for all five 3DJ scopes at the first sign-in (`oauth.scopes` in `.mcp.json`), so later tools don't stall on a missing scope.

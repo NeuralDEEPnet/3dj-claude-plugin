@@ -1,6 +1,6 @@
 # 3DJ tools, routes and limits
 
-Verified against the live 3DJ MCP server on 31 October 2026 (21 tools, 5 of them public; endpoint `https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`). The live tool list is authoritative: if it differs from this page, follow the live schemas and never invent a tool.
+Verified against the live 3DJ MCP server on 1 November 2026 (21 tools, 5 of them public; endpoint `https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`). The live tool list is authoritative: if it differs from this page, follow the live schemas and never invent a tool.
 
 ## How the tools appear
 
@@ -19,10 +19,12 @@ Tool calls may be deferred: load them through the session's tool search before t
 | Tool | Arguments | Returns |
 |---|---|---|
 | `openscad_get_starters` | — | 3 OpenSCAD starters (`mounting-plate`, `vented-cup`, `box-lid`) and the language rules 3DJ's engine accepts. |
-| `cad_get_starters` | `category?` (e.g. `enclosure`, `mating`, `fastener`) | 18 Replicad/OpenCascade B-Rep starter scripts with `Param.*` declarations, plus the full DSL reference (`dslReference`). |
-| `cad_validate_script` | `code` | Syntax, safety and parameter check of a B-Rep script; the live server may also build the solid and return `buildValidation` / `measuredGeometry` (bodies, size, volume, bed fit). Never creates a file. |
+| `cad_get_starters` | `category?` (a word matched against each starter's id, title and summary, e.g. `hinge`, `enclosure`, `gear`; a word that matches nothing returns all) | Up to 19 Replicad/OpenCascade B-Rep starter scripts with `Param.*` declarations, plus the full DSL reference (`dslReference`). |
+| `cad_validate_script` | `code` | Builds a B-Rep script in 3DJ's isolated kernel and measures it: syntax and `Param.*` definitions, then `buildValidation`, `measuredGeometry` (bodies, size, volume, bed fit, checks) and per-body `parts`. Never creates a file. |
 | `cad_get_evidence_schema` | — | The Design Evidence Pack v1 gates: watertight, 0.8 mm nozzle-safe wall, 1.2 mm recommended wall, 45° overhang, 220 × 220 × 250 mm bed, PLA 1.24 g/cm³, evidence labels. |
 | `compose_design_brief` | `code`, `parameters?`, `productName?`, `intendedUse?`, `material?`, `finish?`, `colour?`, `style?` | Builds and measures a B-Rep script and returns import steps for Blender, FreeCAD, Fusion 360, Onshape and slicers, plus a render brief. Renders, sends and saves nothing. |
+
+The two tools that build in 3DJ's kernel, `cad_validate_script` and `compose_design_brief`, are throttled per caller address when called without an account: 20 builds a minute and 120 an hour, answered with `rate_limited` and `retryAfterSeconds`. Signed in, they use the account's own allowance of 90 builds an hour and 500 a day.
 
 ## Account tools — OAuth sign-in (or a per-user API key in hosts that use headers)
 

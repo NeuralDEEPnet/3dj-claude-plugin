@@ -12,7 +12,7 @@
       "name": "3dj-studio",
       "source": "./",
       "description": "3DJ as the live CAD bench of the Neuraldeep Design Studio: make printable parts, design objects through compared concepts, and get parts print-ready, with a free local compile, measure and preview bench.",
-      "version": "0.2.1"
+      "version": "0.2.2"
     }
   ]
 }
