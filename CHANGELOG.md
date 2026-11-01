@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 — 2026-11-01
+
+- New `3dj-concept` skill, folded in from the separate 3DJ Concept plugin: organic and sculptural concept meshes from a text prompt or a public image URL, followed to completion, checked on the bench and handed over with a workbench link. It tells people up front that text-to-3D creates an AI reference image on 3DJ's servers.
+- README and disclosure updated for generation; `3dj-make` and `3dj-design` point to the skill directly; concept trigger evals added.
+
 ## 0.2.2 — 2026-11-01
 
 - Matches 3DJ's server update of 1 November: `cad_validate_script` always builds and measures the solid, so the skills no longer hedge on it, and the free building tools' limits are documented (per-address without an account, 90 builds an hour and 500 a day with one).

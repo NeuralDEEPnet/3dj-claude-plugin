@@ -10,7 +10,7 @@ This repository is the plugin: the repository root is the plugin folder that the
 | `.claude-plugin/marketplace.json` | Lets people install straight from this repository |
 | `.mcp.json` | The 3DJ MCP server. Must point at the same URL as 3DJ's connector listing |
 | `skills/3dj-make/` | Functional parts, plus the shared references and the bench (`scripts/bench.mjs`) |
-| `skills/3dj-design/`, `skills/3dj-print/` | Studio flow and print-readiness; they use the bench and references in `3dj-make` |
+| `skills/3dj-design/`, `skills/3dj-print/`, `skills/3dj-concept/` | Studio flow, print-readiness and generated concept meshes; they use the bench and references in `3dj-make` |
 | `agents/3dj-critic.md` | Independent review agent |
 | `evals/` | Graded cases and trigger queries for `claude plugin eval` |
 
@@ -38,7 +38,7 @@ Every pattern in `skills/3dj-make/references/form-cookbook.md` must compile wate
 - **No credentials in files**, no reading tokens from the user's environment, no package-manager config files (`.npmrc` and similar).
 - **Files** stay text, PNG/JPEG/GIF/WebP images or SVG, each under 256 KiB (images excepted), 512 files at most. No `.DS_Store`, symlinks, submodules or LFS.
 - **Skills describe; they don't steer.** Skills must not tell Claude to call connectors the person didn't ask for, and must not tell it to follow instructions fetched at runtime. Server-provided language notes are reference data.
-- **No AI media generation in this plugin.** Text- and image-to-3D lives in the separate `3dj-concept` plugin in the Neuraldeep Design Studio marketplace until Anthropic confirms in writing that 3D generation is acceptable in the directory.
+- **Generation stays disclosed.** The `3dj-concept` skill tells people before the first generation that text-to-3D creates an AI reference image on 3DJ's servers, and the README's disclosure section says the same. Keep both whenever generation changes.
 - **Honest claims.** Bench and 3DJ results are geometry screens, never manufacturing, structural or safety certification.
 
 ## The 3DJ server

@@ -27,7 +27,7 @@ Go from request to a parametric part the person can see, adjust by name and prin
 |---|---|
 | A printable part, quick iterations, STL | OpenSCAD + bench (default) |
 | STEP for other CAD or CNC, true edge fillets, mating assemblies with standard hardware, gears or a hinge or other joint, or a part saved to the 3DJ gallery | 3DJ B-Rep — follow `references/brep-cad.md`; with an account, `cad_export_model` returns real STL, STEP or GLB files and `cad_save_model` saves the part |
-| Organic, sculptural, character, "make this photo 3D" | the 3dj-concept skill if it is installed; otherwise sculpt with the cookbook's pebble, lathe, twist and faceted patterns |
+| Organic, sculptural, character, "make this photo 3D" | the 3dj-concept skill for a generated mesh; or sculpt with the cookbook's pebble, lathe, twist and faceted patterns |
 
 ## 3 · Model it
 
