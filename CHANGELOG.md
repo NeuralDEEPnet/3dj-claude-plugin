@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 — 2026-11-01
+
+- Tool reference matches 3DJ's 23-tool server (6 public): `cad_get_starters` `index` mode and working category words, `cad_get_configurator` and `cad_publish_configurator` for live three.js configurators, Support Fins STL exports (`stl-fins`, `supportFins`), and the configurator share link. The endpoint stays on the adaptive.ai address until 3DJ's 3dj.app address is confirmed live.
+
 ## 0.3.0 — 2026-11-01
 
 - New `3dj-concept` skill, folded in from the separate 3DJ Concept plugin: organic and sculptural concept meshes from a text prompt or a public image URL, followed to completion, checked on the bench and handed over with a workbench link. It tells people up front that text-to-3D creates an AI reference image on 3DJ's servers.

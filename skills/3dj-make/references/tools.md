@@ -1,6 +1,6 @@
 # 3DJ tools, routes and limits
 
-Verified against the live 3DJ MCP server on 1 November 2026 (21 tools, 5 of them public; endpoint `https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`). The live tool list is authoritative: if it differs from this page, follow the live schemas and never invent a tool.
+Verified against the live 3DJ MCP server on 1 November 2026, 16:20 (23 tools, 6 of them public; endpoint `https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`). The live tool list is authoritative: if it differs from this page, follow the live schemas and never invent a tool.
 
 ## How the tools appear
 
@@ -19,10 +19,11 @@ Tool calls may be deferred: load them through the session's tool search before t
 | Tool | Arguments | Returns |
 |---|---|---|
 | `openscad_get_starters` | — | 3 OpenSCAD starters (`mounting-plate`, `vented-cup`, `box-lid`) and the language rules 3DJ's engine accepts. |
-| `cad_get_starters` | `category?` (a word matched against each starter's id, title and summary, e.g. `hinge`, `enclosure`, `gear`; a word that matches nothing returns all) | Up to 19 Replicad/OpenCascade B-Rep starter scripts with `Param.*` declarations, plus the full DSL reference (`dslReference`). |
+| `cad_get_starters` | `index?` (true → ids, titles and summaries only), `category?` (e.g. `hinge`, `enclosure`, `gear`, `fastener`, `mating`, `bracket`, `joint`; a word that matches nothing returns all) | 19 Replicad/OpenCascade B-Rep starter scripts with `Param.*` declarations, plus the full DSL reference (`dslReference`). Call with `index: true` first, then fetch the one starter you need by a `category` word: the full catalogue is large. |
 | `cad_validate_script` | `code` | Builds a B-Rep script in 3DJ's isolated kernel and measures it: syntax and `Param.*` definitions, then `buildValidation`, `measuredGeometry` (bodies, size, volume, bed fit, checks) and per-body `parts`. Never creates a file. |
 | `cad_get_evidence_schema` | — | The Design Evidence Pack v1 gates: watertight, 0.8 mm nozzle-safe wall, 1.2 mm recommended wall, 45° overhang, 220 × 220 × 250 mm bed, PLA 1.24 g/cm³, evidence labels. |
 | `compose_design_brief` | `code`, `parameters?`, `productName?`, `intendedUse?`, `material?`, `finish?`, `colour?`, `style?` | Builds and measures a B-Rep script and returns import steps for Blender, FreeCAD, Fusion 360, Onshape and slicers, plus a render brief. Renders, sends and saves nothing. |
+| `cad_get_configurator` | `code` or `modelId`, `parameters?` | Builds the script and returns what a live three.js configurator needs: the `Param.*` schema (type, default, min, max, step, unit, choices), parts with colours and materials, connectors and `placeAt` joints, BOM, measured geometry and pinned CDN import URLs (`cdnImports`). Read-only. |
 
 The two tools that build in 3DJ's kernel, `cad_validate_script` and `compose_design_brief`, are throttled per caller address when called without an account: 20 builds a minute and 120 an hour, answered with `rate_limited` and `retryAfterSeconds`. Signed in, they use the account's own allowance of 90 builds an hour and 500 a day.
 
@@ -32,8 +33,9 @@ The two tools that build in 3DJ's kernel, `cad_validate_script` and `compose_des
 |---|---|---|
 | `openscad_compile_model` | `code`, `parameters?` {name: number}, `buildVolumeMm?` [x,y,z] | Real OpenSCAD (Manifold) in an isolated worker: effective source, clamped parameter values, triangle count, closed-mesh check, bounding box, printer fit. 20/hour, 100/day. Creates **no** STL and no gallery record. |
 | `cad_list_models` | `limit?` 1–100 | The user's saved parametric and photo-CAD models with script source and parameter values. |
-| `cad_export_model` | `code`, `parameters?`, `format?` (`stl` default, `step`, `glb`, `zip`), `partName?`, `name?` | Builds a B-Rep script in 3DJ's server kernel, measures every body and writes a real file: binary STL, ISO 10303 STEP, GLB (one named, coloured node per part) or a ZIP of per-part STLs with a BOM. Returns `downloadUrl`, `sha256`, sizes, volumes and import steps. 30/hour, 150/day. **The download link is reachable by anyone who has it.** No gallery record. |
+| `cad_export_model` | `code`, `parameters?`, `format?` (`stl` default, `step`, `glb`, `zip`, `stl-fins`, `stl-fins-only`), `partName?`, `name?`, `supportFins?` | Builds a B-Rep script in 3DJ's server kernel, measures every body and writes a real file: binary STL, ISO 10303 STEP, GLB (one named, coloured node per part) a ZIP of per-part STLs with a BOM, or an STL with breakaway Support Fins and a bed pad baked in (`stl-fins`; `supportFins` sets pose, nozzle, layer height, gap, pad and cutouts). Returns `downloadUrl`, `sha256`, sizes, volumes and import steps. 30/hour, 150/day. **The download link is reachable by anyone who has it.** No gallery record. |
 | `cad_save_model` | `code`, `name`, `parameters?`, `summary?` | Builds the script, checks it is closed, and saves it to the user's gallery as an editable model with an STL. Returns `modelId`, `downloadUrl` and `openUrl` (reopens it in the workbench with these parameters). 20/hour, 100/day. Needed before a print quote request. |
+| `cad_publish_configurator` | `code`, `name`, `parameters?`, `summary?`, `ui?` (`title`, `theme`, `showExplode`, `showBom`) | Builds and saves the part to the user's gallery and returns a shareable live configurator `shareUrl` (`https://www.3dj.app/configurator/<id>`) and `openUrl`. **Anyone with the share link can open it.** Only when the person asks to publish. |
 | `list_providers` | `force?` | Health of each generation backend, supported inputs, remaining hourly/daily generation allowance. |
 | `generate_from_text` | `prompt`, `negativePrompt?` | Starts an asynchronous concept mesh (used by the 3dj-concept skill; 3DJ first creates one AI reference image from the prompt, then reconstructs the mesh). Returns `modelId`, `status: "processing"`. Uses allowance. |
 | `generate_from_image_url` | `imageUrl` (public HTTPS, ≤ 12 MB), `name?` | Image-to-3D. Same polling. |
@@ -59,6 +61,7 @@ The two tools that build in 3DJ's kernel, `cad_validate_script` and `compose_des
 |---|---|
 | Open the workbench (OpenSCAD and B-Rep editors, STEP/STL export, gallery save) | `https://www.3dj.app/workspace` |
 | Reopen a saved model | `https://www.3dj.app/workspace?model=<modelId>` (`cad_save_model` returns it as `openUrl`) |
+| A published live configurator | `https://www.3dj.app/configurator/<modelId>` (`cad_publish_configurator` returns it as `shareUrl`) |
 | Open a generated mesh in the viewer | `https://www.3dj.app/workspace?modelUrl=<URL-encoded downloadUrl>` |
 | Start image-to-3D from a reference image (e.g. a product render) | `https://www.3dj.app/workspace?ref=<URL-encoded image URL>` |
 | Mint a per-user API key (CLI and header-based hosts) | `https://www.3dj.app/agents` |
