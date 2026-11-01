@@ -1,6 +1,6 @@
 # 3DJ tools, routes and limits
 
-Verified against the live 3DJ MCP server on 1 November 2026, 16:20 (23 tools, 6 of them public; endpoint `https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`). The live tool list is authoritative: if it differs from this page, follow the live schemas and never invent a tool.
+Verified against the live 3DJ MCP server on 1 November 2026 (23 tools, 6 of them public; endpoint `https://www.3dj.app/api/mcp`, with sign-in on 3dj.app). The live tool list is authoritative: if it differs from this page, follow the live schemas and never invent a tool.
 
 ## How the tools appear
 

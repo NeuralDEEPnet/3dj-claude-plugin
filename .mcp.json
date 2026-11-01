@@ -2,7 +2,7 @@
   "mcpServers": {
     "3dj": {
       "type": "http",
-      "url": "https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp",
+      "url": "https://www.3dj.app/api/mcp",
       "oauth": {
         "scopes": "account:read models:read models:write quotes:read quotes:write"
       }

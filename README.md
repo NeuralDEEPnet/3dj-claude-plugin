@@ -21,7 +21,7 @@ Skills also start on their own when a request matches.
 
 | Component | Purpose |
 |---|---|
-| `3dj` MCP server | The 3DJ service (`https://3dj-neuraldeepnet.on.adaptive.ai/api/mcp`): OpenSCAD and B-Rep CAD starters, script validation, OpenSCAD compile and measure, STL/STEP/GLB export and gallery saves for B-Rep parts, your saved models and downloads, print quote requests, text- and image-to-3D generation |
+| `3dj` MCP server | The 3DJ service (`https://www.3dj.app/api/mcp`): OpenSCAD and B-Rep CAD starters, script validation, OpenSCAD compile and measure, STL/STEP/GLB export and gallery saves for B-Rep parts, your saved models and downloads, print quote requests, text- and image-to-3D generation |
 | `3dj-make` skill | Functional printable parts; holds the bench and shared references (3DJ tools, OpenSCAD rules, B-Rep CAD, print gates, form cookbook) |
 | `3dj-design` skill | The studio flow with compared directions |
 | `3dj-print` skill | Print-readiness, orientation and operator quote reviews |

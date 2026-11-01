@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2 — 2026-11-01
+
+- The `3dj` MCP server now points at 3DJ's own address, `https://www.3dj.app/api/mcp`, with OAuth sign-in on 3dj.app (all five scopes requested at sign-in; HTTP 403 step-up for a missing scope). The old adaptive.ai address stays live as an alias, but people who installed an earlier version should sign in to 3dj again after updating.
+
 ## 0.3.1 — 2026-11-01
 
 - Tool reference matches 3DJ's 23-tool server (6 public): `cad_get_starters` `index` mode and working category words, `cad_get_configurator` and `cad_publish_configurator` for live three.js configurators, Support Fins STL exports (`stl-fins`, `supportFins`), and the configurator share link. The endpoint stays on the adaptive.ai address until 3DJ's 3dj.app address is confirmed live.
