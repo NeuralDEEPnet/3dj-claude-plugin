@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 — 2026-11-03
+
+- Free build limits follow 3DJ's per-conversation throttle (it no longer counts every Claude user against one shared address); `rate_limited` handling spelled out.
+
 ## 0.4.0 — 2026-11-02
 
 - New `3dj-configurator` skill: turns a parametric model into a live three.js configurator whose sliders rebuild the real CAD solid. It writes configurator-friendly parameters (customer-facing knobs, safe derived values, joints as knobs) and validates the extremes. It shows the configurator inline in Claude (3DJ's `ui://3dj/configurator` view), publishes a share link with the person's OK (public to link holders), or hands over an embeddable `<threedj-configurator>` page, using the npm runtime for Claude artifacts once published and www.3dj.app's runtime elsewhere.
