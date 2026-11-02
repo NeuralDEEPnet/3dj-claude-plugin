@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 — 2026-11-02
+
+- New `3dj-configurator` skill: turns a parametric model into a live three.js configurator whose sliders rebuild the real CAD solid. It writes configurator-friendly parameters (customer-facing knobs, safe derived values, joints as knobs) and validates the extremes. It shows the configurator inline in Claude (3DJ's `ui://3dj/configurator` view), publishes a share link with the person's OK (public to link holders), or hands over an embeddable `<threedj-configurator>` page, using the npm runtime for Claude artifacts once published and www.3dj.app's runtime elsewhere.
+- Tool reference notes the inline configurator view; `3dj-design` offers a configurator of the chosen direction; README and disclosure updated; configurator trigger evals.
+
 ## 0.3.2 — 2026-11-01
 
 - The `3dj` MCP server now points at 3DJ's own address, `https://www.3dj.app/api/mcp`, with OAuth sign-in on 3dj.app (all five scopes requested at sign-in; HTTP 403 step-up for a missing scope). The old adaptive.ai address stays live as an alias, but people who installed an earlier version should sign in to 3dj again after updating.

@@ -13,6 +13,7 @@ Design and make real, printable objects with Claude. 3DJ Studio connects Claude 
 | `/3dj-make` "A wall bracket that holds a 25 mm pipe 30 mm off the wall, two M4 screws, printed in PETG." | Writes a parametric model, compiles and measures it, checks it against the 3DJ print gates, shows four views and a print check, and hands over `.scad` + `.stl` with named knobs |
 | `/3dj-design` "A desk headphone stand that feels premium — show me some directions first." | Brief → design DNA → three structurally different directions compared at the same scale with silhouettes and a stand-in of the headphones → critique → development → printable handoff |
 | `/3dj-print` "Will this STL fit my Prusa MINI, and how should I orient it?" | Watertight, wall, overhang and bed checks, the best orientation, slicer starting points, and — on request — a 3DJ operator print quote review |
+| `/3dj-configurator` "Make a configurator for this phone stand so customers can set the phone width and tilt." | Turns the parametric model into a live three.js configurator: shown right in the conversation, shared as a 3dj.app link, or handed over as a page to embed. The sliders rebuild the real CAD solid |
 | `/3dj-concept` "Turn this render into a 3D model I can print: https://…/lamp.png" | Starts a 3DJ image-to-3D (or text-to-3D) generation, follows it to the finished mesh, checks it on the bench and hands over the file with a workbench link |
 
 Skills also start on their own when a request matches.
@@ -25,6 +26,7 @@ Skills also start on their own when a request matches.
 | `3dj-make` skill | Functional printable parts; holds the bench and shared references (3DJ tools, OpenSCAD rules, B-Rep CAD, print gates, form cookbook) |
 | `3dj-design` skill | The studio flow with compared directions |
 | `3dj-print` skill | Print-readiness, orientation and operator quote reviews |
+| `3dj-configurator` skill | Live three.js product configurators from a parametric model: inline, share link or embeddable page |
 | `3dj-concept` skill | Organic and sculptural concept meshes from a text prompt or an image (3DJ account) |
 | `3dj-critic` agent | Independent review of rendered models against the brief and design DNA |
 
@@ -51,7 +53,7 @@ It reads `.scad`, `.stl` and `.glb`, and writes a views sheet, a colour-coded pr
 
 - **Runs locally**: the bench (`skills/3dj-make/scripts/bench.mjs`, readable source, MIT). It reads the model files you point it at and writes its images, STL and report next to them. It sends nothing anywhere.
 - **Fetches once, with your agreement**: `bench.mjs setup` downloads the OpenSCAD WebAssembly engine, `openscad-wasm-prebuilt` 1.2.0 (about 11 MB, OpenSCAD is GPL-2.0), from the public npm registry into `~/.cache/3dj-bench`, with install scripts disabled, and refuses to use it unless its SHA-512 matches the hash pinned in the script. Claude asks before running it. Nothing else is downloaded.
-- **Sends to 3DJ, only when a 3DJ tool is called**: the OpenSCAD or CAD script source and parameters you ask it to compile, validate, export or save, the model ids you ask about, the prompts or public image URLs you ask it to turn into 3D, and, for a quote request, the model, dimensions, material, colour, quantity, intended use and destination country and region (never a street address or payment details). For text-to-3D, 3DJ first creates one AI reference image from your prompt and reconstructs the mesh from it; generated models go to your 3DJ gallery. Exported files are stored by 3DJ and their download links work for anyone who has them; saved parts go to your gallery; a configurator you ask it to publish can be opened by anyone with its link. 3DJ's handling of that data is described in its [privacy policy](https://www.3dj.app/privacy).
+- **Sends to 3DJ, only when a 3DJ tool is called**: the OpenSCAD or CAD script source and parameters you ask it to compile, validate, export or save, the model ids you ask about, the prompts or public image URLs you ask it to turn into 3D, and, for a quote request, the model, dimensions, material, colour, quantity, intended use and destination country and region (never a street address or payment details). For text-to-3D, 3DJ first creates one AI reference image from your prompt and reconstructs the mesh from it; generated models go to your 3DJ gallery. Exported files are stored by 3DJ and their download links work for anyone who has them; saved parts go to your gallery; a configurator you ask it to publish can be opened by anyone with its link. A configurator page loads three.js, replicad and the 3DJ runtime from jsDelivr or www.3dj.app in the viewer's browser. 3DJ's handling of that data is described in its [privacy policy](https://www.3dj.app/privacy).
 - **No telemetry**, no credentials read from your machine, and no other network destinations.
 
 ## Privacy
