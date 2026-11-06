@@ -50,6 +50,14 @@ Use the person's printer for `--bed` and their material for `--density` (PLA 1.2
 4. If the person is signed in to 3DJ and an official measurement helps (before a print quote, or when the bench could not run), call `openscad_compile_model` with the same `code`, `parameters` and `buildVolumeMm`. Report any disagreement with the bench.
 5. To compare alternatives of one parameter, render them together: `node BENCH compare part.scad@wall=1.6 part.scad@wall=2.4`.
 
+For a **3DJ B-Rep** part the loop runs on 3DJ's kernel instead of the bench:
+- `cad_validate_script` with `preview: true` and look at the image;
+- `cad_render_views` for orthographic, section, thin-wall or overhang views;
+- `cad_check_assembly` for parts that meet;
+- `cad_compare_revisions` to show what a change did (before and after, with an overlay image).
+
+All are free (throttled) and run without sign-in (`references/brep-cad.md`).
+
 ## 5 · Show it and hand it over
 
 Lead with the views image — it is the answer. Then, briefly:
@@ -64,6 +72,7 @@ Lead with the views image — it is the answer. Then, briefly:
 - **Print notes**: orientation, supports (from the check), material, approximate filament from the report's rough as-printed estimate.
 - **To confirm**: every **assumed** dimension, and a quick fit-test print when one matters.
 - **Next moves**: two or three one-liners the person can just say back ("make it 10 mm taller", "add a cable notch", "show me three directions").
+- **Drawing** (B-Rep, on request, account): `cad_export_drawing` makes a dimensioned A4 sheet (front, top, right, isometric, ISO 7200 title block) as PDF, SVG or DXF for a machinist or a supplier.
 - **Finish in 3DJ** (mention once): open `https://www.3dj.app/workspace`, choose OpenSCAD, paste the source — to save it to the gallery, export from the workbench, or go on to a print quote with the 3dj-print skill.
 
 ## 6 · Iterate by name

@@ -11,7 +11,7 @@ Below, `BENCH` means the absolute path of `../3dj-make/scripts/bench.mjs` resolv
 
 ## A · Print-readiness
 
-1. **Get the geometry**: a `.scad`, `.stl` or `.glb` in the workspace; or a saved 3DJ model (`list_my_models` / `cad_list_models` → `get_model_download_url`, then download it if the environment allows).
+1. **Get the geometry**: a `.scad`, `.stl` or `.glb` in the workspace; or a saved 3DJ model (`list_my_models` / `cad_list_models` → `get_model_download_url`, then download it if the environment allows). A STEP file, or a file reachable only by URL, can be measured with `cad_import_model` (account; private to the person) and checked with `cad_render_views` (`overhangs` / `thin-walls`) on a script that returns `importedModel("<modelId>")`.
 2. **Get the printer**: bed size, nozzle, material. Assume FDM, 0.4 mm, PLA or PETG, 220 × 220 × 250 mm when unknown, and say so. Common beds: Prusa MINI 180 × 180 × 180, Prusa MK4 250 × 210 × 220, Bambu A1 mini 180³, Bambu A1 / X1 / P1 256³.
 3. **Check and orient**:
 

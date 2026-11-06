@@ -59,13 +59,13 @@ node BENCH build <name>.scad --bed 220,220,250 --density 1.27
 
 (Use the person's printer and material.) Review the product as it will look with `-D assembled=1 -D ghost=1 --no-stl --name <name>-in-use`; the default `part = 0` build is the print layout.
 
-Look at the views and the check every time. Settle key proportions by comparing variants side by side instead of guessing: `node BENCH compare lamp.scad@height=140 lamp.scad@height=170 lamp.scad@height=200`. Add the real interfaces, clearances (0.25 mm), and the print strategy: orientation via `node BENCH orient` once per part (`-D part=N --name <name>-partN`), a split into parts where a single print would need heavy support or exceeds the bed.
+Look at the views and the check every time. For a direction developed in 3DJ B-Rep, use `cad_render_views` (and `cad_check_assembly` for multi-part products) as the views and check, and `cad_compare_revisions` to show a change before and after. Settle key proportions by comparing variants side by side instead of guessing: `node BENCH compare lamp.scad@height=140 lamp.scad@height=170 lamp.scad@height=200`. Add the real interfaces, clearances (0.25 mm), and the print strategy: orientation via `node BENCH orient` once per part (`-D part=N --name <name>-partN`), a split into parts where a single print would need heavy support or exceeds the bed.
 
 ## 6 · Finish: CMF, print, handoff
 
 - **CMF**: name the material and finish (matte PLA, PETG, ASA outdoors, TPU feet or grips), colour as a decision (two-tone by part or by a filament change at a set height), layer height for visible curves, surface treatments (fuzzy skin for grip).
 - **Optional next steps** — offer once: an operator print quote with the 3dj-print skill; an organic or sculptural variant with the 3dj-concept skill; a live configurator of the chosen direction with the 3dj-configurator skill.
-- **Handoff**: the views and check images, `.scad` and `.stl` per part, the knob table, key dimensions with evidence tags, assumptions to confirm, print settings, and the next prototype (e.g. "print only the cradle section at 30 mm tall to test the phone fit").
+- **Handoff**: for a B-Rep product, a dimensioned drawing from `cad_export_drawing` when someone else will make it; review notes can be pinned to the saved model with `cad_add_review_comment` when the person works with a team. Then the views and check images, `.scad` and `.stl` per part, the knob table, key dimensions with evidence tags, assumptions to confirm, print settings, and the next prototype (e.g. "print only the cradle section at 30 mm tall to test the phone fit").
 
 ## Rules
 

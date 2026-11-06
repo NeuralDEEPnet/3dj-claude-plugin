@@ -11,7 +11,8 @@ Use 3DJ's parametric B-Rep engine (Replicad on OpenCascade, built in 3DJ's serve
 
 1. Call `cad_get_starters` (free) and read `dslReference` — it is the authoritative language reference. Call it with `index: true` first for ids, titles and summaries only, then pass a `category` word such as `hinge`, `enclosure`, `gear` or `fastener` to get just the matching starters with their code; a word that matches nothing returns all of them. Start from the closest starter (project box, hinged-lid enclosure, extrusion foot, bolt flange, gripper, planetary reducer, lathe profile …) instead of a blank page.
 2. Write the script: `Param.number/bool/choice` declarations first, Z up, millimetres, solids on Z = 0, then geometry, then `return` a shape, an array, or named parts `[{ name, shape, color }]`. Keep mating parts separate and seat them with connectors (`withConnectors`, then `matchTo`) or references (`withReferences`, `attachTo`). A connector's `axis` points toward the mating part. For a joint, `placeAt(target, movingName, targetName, { angle, offset })` seats the part, then turns it about the mated axis or slides it along it; make the angle a `Param` and the part swings in the viewer. `cad_get_starters` with `category: "hinge"` returns worked joints, including the hinged-lid enclosure (base, lid and pin).
-3. Call `cad_validate_script` with the code and fix every reported problem. It builds the solid in 3DJ's kernel and returns `buildValidation`, `measuredGeometry` (body count, size, volume, bed fit, checks) and per-body `parts` (name, size, volume, closed). Report exactly what it returned — a build check is not an exported file and not a print inspection. Without an account it is throttled per conversation; see `tools.md`.
+3. Call `cad_validate_script` with the code and fix every reported problem. It builds the solid in 3DJ's kernel and returns `buildValidation`, `measuredGeometry` (body count, size, volume, bed fit, checks) and per-body `parts` (name, size, volume, closed). Report exactly what it returned — a build check is not an exported file and not a print inspection.
+   Then **look at it**: pass `preview: true` for an isometric image, or call `cad_render_views` for front, top and right views, a `section` cut or `thin-walls` / `overhangs` highlights. Judge the form from the picture as well as the numbers, and show the person the image. For anything with two or more parts, run `cad_check_assembly` too. It reports interference volumes, the minimum clearance and collisions over each joint's range; fix interference before showing the assembly. Without an account it is throttled per conversation; see `tools.md`.
 4. Get real files. With a 3DJ account, call `cad_export_model` with the script, the parameter values and a format chosen by where the file is going: `stl` for slicers, `step` for FreeCAD, Fusion 360, Onshape or SolidWorks, `glb` for Blender and web viewers, `zip` for an assembly (one STL per part plus a BOM). To export one body, pass `partName` exactly as the build named it in `parts`: library parts can keep their own names (a `lib.gearPair` returned `pinion z12` and `gear z30` whatever the descriptors said). It returns a `downloadUrl` and `sha256`; tell the person the link works for anyone who has it. To keep the part in their gallery (and before a print quote), call `cad_save_model` and give them its `openUrl`. Without an account, hand over the `.js` script and parameter values to paste into the CAD script editor at `https://www.3dj.app/workspace`. Either way, a file exists only once a download URL has been returned or the person has exported it.
 5. Look at the real output: run the exported STL through the bench (`node BENCH build part.stl`) for views and the print check, when it can be downloaded into the workspace.
 
@@ -29,11 +30,15 @@ return [{ name: "Plate", shape: plate, color: "#5b6b7a" }];
 ```
 
 ```js
-// Validated with cad_validate_script (solid build passed: 2 bodies, 66 × 48 × 8 mm,
-// reported as "pinion z12" and "gear z30"). Ratio and centre distance: pair.ratio, pair.centerDistance.
-const teeth = Param.number("Gear teeth", 30, { min: 18, max: 48, integer: true });
+// Validated with cad_validate_script (solid build passed: 2 bodies, reported as "pinion z18"
+// and "gear z36"). Ratio and centre distance: pair.ratio, pair.centerDistance.
+// Check the mesh with cad_check_assembly: it should pass with a small clearance. Servers
+// before 3DJ's gear-profile fix of 6 November 2026 drew teeth that widen to the tip and
+// report interference on every lib.gearPair; say so instead of trusting the mesh.
+// Keep the pinion at 17 teeth or more at 20° to avoid undercut.
+const teeth = Param.number("Gear teeth", 36, { min: 24, max: 60, integer: true });
 const pair = lib.gearPair({
-  pinion: { module: 1.5, teeth: 12, faceWidth: 8, boreDiameter: 5 },
+  pinion: { module: 1.5, teeth: 18, faceWidth: 8, boreDiameter: 5 },
   gear: { module: 1.5, teeth, faceWidth: 8, boreDiameter: 8 },
   backlash: 0.15,
 });
