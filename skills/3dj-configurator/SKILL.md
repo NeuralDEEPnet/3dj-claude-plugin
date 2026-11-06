@@ -18,13 +18,13 @@ Start from an existing script, or from a starter: `cad_get_starters` with `index
 - **Make motion a knob.** A hinge or slide is a `placeAt` joint with its `angle` or `offset` as a `Param`, so the part moves when the slider does.
 - **Named, coloured parts:** `return [{ name, shape, color }, …]`. The configurator shows them, the exploded view separates them, and the bill of materials lists them.
 
-Validate with `cad_validate_script` at the defaults, then at the extremes of every knob: it takes only `code`, so temporarily set those values as the `Param` defaults. Fix every failure before going on.
+Validate with `cad_validate_script` at the defaults (pass `preview: true` to see the rendered isometric view inline), then at the extremes of every knob by passing `parameters: { ... }` (and `cad_check_assembly` when parts mate or move on `placeAt` joints). Fix every failure before going on.
 
 ## 2 · Show it live
 
 Pick by where the person is. Say which one you used.
 
-**A. In the conversation (3dj connector or this plugin's server).** Call `cad_get_configurator { code, parameters? }`. Where Claude supports interactive tool results, the live configurator appears under the call (3DJ's `ui://3dj/configurator` view), and the person can drag the sliders right there. The result also carries the Param schema, parts, joints, BOM and measurements. Summarise those in a line, and do not paste the code back.
+**A. In the conversation (3dj connector or this plugin's server).** Call `cad_get_configurator { code, parameters? }` (or `cad_validate_script { code, parameters?, preview: true }`). Where Claude supports interactive tool results, the live configurator appears under the call (3DJ's `ui://3dj/configurator` view), and the person can drag the sliders, toggle glass reference walls, animate joints, or download STL/STEP/GLB right there. Always pass `preview: true` on `cad_validate_script` or call `cad_render_views` when you also want a static rendered PNG in the chat stream for hosts or mobile clients that do not expand MCP App iframes. The result carries the Param schema, parts, joints, BOM and measurements. Summarise those in a line, and do not paste the code back.
 
 **B. A share link.** When the person wants others to use it, ask first, then call `cad_publish_configurator { code, name, parameters?, summary?, ui? }` (needs a 3DJ account). Give them `shareUrl` (`https://www.3dj.app/configurator/<id>`) and `openUrl`. Say plainly that **anyone with the link can open it and see the design**. Unpublished saved models stay private. To reopen one later, call `cad_get_configurator { modelId }`.
 

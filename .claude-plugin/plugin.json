@@ -1,8 +1,8 @@
 {
   "name": "3dj-studio",
   "displayName": "3DJ Studio",
-  "version": "0.4.1",
-  "description": "3DJ as the live CAD bench of the Neuraldeep Design Studio: make printable parts, design objects through compared concepts, build live three.js configurators, turn text or images into 3D, and get parts print-ready, with a free local compile, measure and preview bench.",
+  "version": "0.10.0",
+  "description": "3DJ as the live CAD bench of the Neuraldeep Design Studio: make printable parts, design objects through compared concepts, build live three.js configurators, render orthographic/section views, export A4 manufacturing drawings, turn text or images into 3D, and get parts print-ready.",
   "author": {
     "name": "Neural Deep Network Ltd",
     "email": "3d@neuraldeep.net",

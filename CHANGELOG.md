@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.0 — 2026-11-06
+
+- Synced with 3DJ MCP server 1.5.0 (32 tools, 9 public): added `cad_render_views` (inline orthographic/isometric/section/thin-wall/overhang PNGs), `cad_validate_script` `parameters` and `preview: true`, `cad_check_assembly` (interference & joint range sweep), `cad_compare_revisions` (visual diff overlay PNG + revision history), `cad_import_model` (`importedModel(id)` STEP/STL/GLB reference geometry), `cad_export_drawing` (A4 PDF/SVG/DXF manufacturing drawings with ISO 7200 title block), `cad_save_feature` / `cad_list_features` (`defineFeature` / `lib.mine`), and `cad_add_review_comment` / `cad_list_review_comments`.
+- Updated `ui://3dj/configurator` MCP App (`v1.5.0`) with topological B-Rep edge rendering, starter selector, direct STL/STEP/GLB downloads, workbench deep link, translucent reference walls, and resilient `tool-input` / `tool-result` state retention.
+- Added `authServerMetadataUrl` to `.mcp.json` and aligned version with `.claude-plugin/marketplace.json`.
+
 ## 0.4.1 — 2026-11-03
 
 - Free build limits follow 3DJ's per-conversation throttle (it no longer counts every Claude user against one shared address); `rate_limited` handling spelled out.
@@ -11,11 +17,11 @@
 
 ## 0.3.2 — 2026-11-01
 
-- The `3dj` MCP server now points at 3DJ's own address, `https://www.3dj.app/api/mcp`, with OAuth sign-in on 3dj.app (all five scopes requested at sign-in; HTTP 403 step-up for a missing scope). The old adaptive.ai address stays live as an alias, but people who installed an earlier version should sign in to 3dj again after updating.
+- The `3dj` MCP server now points at 3DJ's own address, `https://www.3dj.app/api/mcp`, with OAuth sign-in on 3dj.app (all five scopes requested at sign-in; HTTP 403 step-up for a mising scope). The old adaptive.ai address stays live as an alias, but people who installed an earlier version should sign in to 3dj again after updating.
 
 ## 0.3.1 — 2026-11-01
 
-- Tool reference matches 3DJ's 23-tool server (6 public): `cad_get_starters` `index` mode and working category words, `cad_get_configurator` and `cad_publish_configurator` for live three.js configurators, Support Fins STL exports (`stl-fins`, `supportFins`), and the configurator share link. The endpoint stays on the adaptive.ai address until 3DJ's 3dj.app address is confirmed live.
+- Tool reference matches 3DJ's 23-tool server (6 public): `cad_get_starters` `index` mode and working category words, `cad_get_configurator` and `cad_publish_configurator` for live three.js configurators, Support Fins STL&�xports (`stl-fins`, `supportFins`), and the configurator share link. The endpoint stays on the adaptive.ai address until 3DJ's 3dj.app address is confirmed live.
 
 ## 0.3.0 — 2026-11-01
 
@@ -26,7 +32,7 @@
 
 - Matches 3DJ's server update of 1 November: `cad_validate_script` always builds and measures the solid, so the skills no longer hedge on it, and the free building tools' limits are documented (per-address without an account, 90 builds an hour and 500 a day with one).
 - B-Rep reference covers the new language: `placeAt` joints driven by a parameter, involute gears and belt drives, sweeps along 3D curves and constraint-solved sketches, with a second live-validated example (a parametric gear pair). Notes that `partName` must match the part names the build reports.
-- `cad_get_starters` filtering explained (matched against id, title and summary; 19 starters, including the new hinged-lid enclosure).
+- cad_get_starters` filtering explained (matched against id, title and summary; 19 starters, including the new hinged-lid enclosure).
 
 ## 0.2.1 — 2026-11-01
 
@@ -45,6 +51,6 @@ First release of 3DJ Studio, the CAD bench of the Neuraldeep Design Studio.
 - Connects the 3DJ MCP server: OpenSCAD and B-Rep starters, script validation and the evidence schema without an account; hosted OpenSCAD compile, saved models, downloads and print quote reviews with one.
 - Skills: `3dj-make` (functional printable parts), `3dj-design` (three modelled directions compared at one scale, critique, development, handoff), `3dj-print` (print-readiness, orientation, slicer starting points, operator quote reviews).
 - Agent: `3dj-critic`, an independent review of rendered models against the brief and design DNA.
-- Free local bench (`skills/3dj-make/scripts/bench.mjs`, MIT, Node 18+): compiles OpenSCAD 2025.01 with the WebAssembly engine (downloaded once by `setup`, pinned and SHA-512 verified, install scripts disabled), reads STL and GLB, checks watertightness, wall thickness, overhang regions, bed fit and mass against the 3DJ Design Evidence Pack v1 gates, and renders views, print checks, orientation studies and same-scale concept or parameter-variant comparisons.
+- Free local bench (`skills/3dj-make/scripts/bench.mjs`, MIT, Node 18+): compiles OpenSCAD 2025.01 with the WebAssembly engine (downloaded once by `setup`, pinned and SHA-512 verified, install scripts disabled), reads STL&�nd GLB too. Use it for every iteration; use `openscad_compile_model` when an official 3DJ measurement is wanted or when Node is unavailable.
 - Form cookbook of 13 tested OpenSCAD patterns; package-ghost and assembled-review conventions.
 - Evals: two graded cases and trigger queries.

@@ -4,7 +4,8 @@
       "type": "http",
       "url": "https://www.3dj.app/api/mcp",
       "oauth": {
-        "scopes": "account:read models:read models:write quotes:read quotes:write"
+        "scopes": "account:read models:read models:write quotes:read quotes:write",
+        "authServerMetadataUrl": "https://www.3dj.app/.well-known/oauth-authorization-server"
       }
     }
   }
