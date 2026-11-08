@@ -75,6 +75,15 @@ The tools that build in 3DJ's kernel without an account (`cad_validate_script`, 
 
 Unsaved source has no deep link: for an OpenSCAD script, or a B-Rep script the person doesn't want saved, tell them to open the workbench, pick the matching editor and paste the file.
 
-## The free local bench
+## Seeing and checking a part
 
-`scripts/bench.mjs` (in the 3dj-make skill folder) needs only Node 18+. It compiles OpenSCAD with the official WebAssembly build (OpenSCAD 2025.01, Manifold backend — the same backend as `openscad_compile_model`), which `node BENCH setup` downloads once into `~/.cache/3dj-bench` (override with `THREEDJ_BENCH_HOME`) after the person agrees. It reads STL and GLB too. Use it for every iteration; use `openscad_compile_model` when an official 3DJ measurement is wanted or when Node is unavailable.
+This plugin runs nothing on the person's machine: every build, measurement and picture comes from the 3DJ tools above.
+
+| Need | Tool |
+|---|---|
+| Build, measure and a first picture | `cad_validate_script` with `preview: true` |
+| Orthographic views, section cuts, thin-wall and overhang highlights | `cad_render_views` |
+| Parts that meet or move | `cad_check_assembly` |
+| Before and after, or two values of one parameter | `cad_compare_revisions` |
+| An existing STL, STEP or GLB (account) | `cad_import_model`, then `cad_render_views` on a script that returns `importedModel("<modelId>")` |
+| OpenSCAD source (account) | `openscad_compile_model` — numbers only, no picture and no file |

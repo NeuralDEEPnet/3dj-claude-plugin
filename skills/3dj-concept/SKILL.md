@@ -11,8 +11,6 @@ The 3DJ tools may appear under several names: from this plugin's `3dj` server, f
 
 Tell the person once, before the first generation, how it works: text-to-3D first has 3DJ create one AI reference image from the prompt, then reconstructs a mesh from it; image-to-3D reconstructs from their image. Both run on 3DJ's servers and use the account's generation allowance.
 
-Below, `BENCH` means the absolute path of `../3dj-make/scripts/bench.mjs` resolved from this skill's folder.
-
 ## 1 · Check the account and capacity
 
 Call `get_account_status` and `list_providers` (remaining hourly and daily allowance, which inputs are healthy).
@@ -38,6 +36,6 @@ One object, whole and centred, nothing else. Lead with silhouette and proportion
 ## 4 · Hand it over
 
 - The download link, and the viewer link: `https://www.3dj.app/workspace?modelUrl=<URL-encoded downloadUrl>`.
-- If the file can be downloaded into the workspace, look at it on the bench: `node BENCH build model.glb --fit <longest side in mm>` → views and print check. Generated meshes are often not watertight; report what the check found instead of assuming. Otherwise say the preview is in the workbench link.
+- To check it for printing, the 3dj-print skill can import the mesh into 3DJ (`cad_import_model` with the `downloadUrl`) and render the thin-wall and overhang views. Generated meshes are often not watertight; report what the check found instead of assuming. Otherwise say the preview is in the workbench link.
 - Say what it is: a concept mesh (GLB), unitless until scaled, not a parametric or print-certified part. `refinementHandoff`, when returned, tells the workbench how to continue refining it.
 - Next moves: scale it to size, generate a variant (change one thing in the prompt), add a measured base or mount with 3dj-make, or check printing with 3dj-print.

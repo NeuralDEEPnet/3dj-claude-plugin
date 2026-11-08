@@ -1,6 +1,6 @@
 # Form cookbook — OpenSCAD patterns for parts that look designed
 
-Every snippet compiles on the local bench and inside 3DJ's rules (no `include`, `use`, `import`, `surface`, `text`; `$fn` ≤ 96; millimetres, Z up, sitting on Z = 0). Each one is a complete file: copy it, rename the parameters to the user's words, and adapt. Combine patterns rather than inventing new primitives. There is no `fillet()` or `roundedcube()` in OpenSCAD — rounding comes from `offset()`, `hull()` and `rotate_extrude()` as shown.
+Every snippet compiles with 3DJ's `openscad_compile_model` and inside 3DJ's rules (no `include`, `use`, `import`, `surface`, `text`; `$fn` ≤ 96; millimetres, Z up, sitting on Z = 0). Each one is a complete file: copy it, rename the parameters to the user's words, and adapt. Combine patterns rather than inventing new primitives. There is no `fillet()` or `roundedcube()` in OpenSCAD — rounding comes from `offset()`, `hull()` and `rotate_extrude()` as shown.
 
 Pick by the design DNA, not by habit:
 

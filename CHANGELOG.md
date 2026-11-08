@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.11.0 — 2026-11-08
+
+- Removed the local bench (`skills/3dj-make/scripts/bench.mjs`) and `assets/icon.svg`. The Claude directory accepts scripts and files outside its allowed types only from Verified organizations, so the plugin now ships only Markdown, JSON, YAML and the PNG icon, and runs nothing on the person's machine.
+- Every build, measurement and picture now comes from 3DJ's own tools: `cad_validate_script` (`preview: true`), `cad_render_views` with thin-wall and overhang highlights and section cuts, `cad_check_assembly`, `cad_compare_revisions`, `cad_import_model` for existing files, and `openscad_compile_model` for OpenSCAD source.
+- `3dj-make` now defaults to 3DJ B-Rep, which renders pictures at every step without an account; OpenSCAD stays available when asked for.
+- `3dj-design` compares directions with matching `cad_render_views` renders and measured sizes; `3dj-print` checks and orients with the overhang and thin-wall views; the `3dj-critic` agent reviews 3DJ renders and measurements.
+- README disclosure updated: nothing runs locally and nothing is downloaded by the plugin.
+- Fixed a stray control character in this changelog.
+
 ## 0.10.1 — 2026-11-06
 
 - Skills use 3DJ's new tools in the work itself, not only in the reference:
@@ -41,7 +50,7 @@
 
 - Matches 3DJ's server update of 1 November: `cad_validate_script` always builds and measures the solid, so the skills no longer hedge on it, and the free building tools' limits are documented (per-address without an account, 90 builds an hour and 500 a day with one).
 - B-Rep reference covers the new language: `placeAt` joints driven by a parameter, involute gears and belt drives, sweeps along 3D curves and constraint-solved sketches, with a second live-validated example (a parametric gear pair). Notes that `partName` must match the part names the build reports.
-- cad_get_starters` filtering explained (matched against id, title and summary; 19 starters, including the new hinged-lid enclosure).
+- `cad_get_starters` filtering explained (matched against id, title and summary; 19 starters, including the new hinged-lid enclosure).
 
 ## 0.2.1 — 2026-11-01
 

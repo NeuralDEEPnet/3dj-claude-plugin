@@ -21,14 +21,14 @@ Evidence labels for dimensions: **measured** (calipers, ±0.15 mm), **observed**
 | Flat ceiling over a gap | Keep bridges short (≲ 20 mm), or add a 45° chamfer, or reorient |
 | Horizontal hole > 8 mm | Teardrop or diamond top, or print the hole vertical |
 | Bottom-edge fillet drooping | Replace with a 45° chamfer; add a 0.4–0.6 mm elephant-foot chamfer on the first layer |
-| Part taller than it is wide | Wider base, brim, or lay it down (`node BENCH orient`) |
+| Part taller than it is wide | Wider base, brim, or lay it down |
 | Snap fit cracking | Longer beam, not thinner; keep layers along the beam |
 | Threads | Heat-set inserts or captive nuts; printed threads only above ~M8 |
 | Too big for the bed | Split along a flat, hidden plane with alignment pins (0.2 mm clearance) or dovetails |
 
 ## Orientation
 
-Choose with `node BENCH orient`, then apply judgement: the bench ranks support area, bed contact and height, but strength depends on layer direction — keep layer lines along the main load path (a hook loaded in bending should print on its side), and put the cosmetic face either on the bed (smooth, flat) or facing up (no support scars).
+Choose by looking at `cad_render_views` with `highlight: "overhangs"` for each candidate pose (least support area, a flat bed face, low height), then apply judgement: strength depends on layer direction — keep layer lines along the main load path (a hook loaded in bending should print on its side), and put the cosmetic face either on the bed (smooth, flat) or facing up (no support scars).
 
 ## Slicer starting points (FDM, 0.4 mm nozzle — say they are starting points)
 
@@ -45,5 +45,5 @@ Use the filament's own temperature range. Print a fit test (the interface sectio
 ## Never
 
 - Call a part print-ready or manufacturable without naming the checks that ran.
-- Treat the bench or a 3DJ tool result as a structural, food-contact, medical, pressure or safety certification.
+- Treat a 3DJ tool result as a structural, food-contact, medical, pressure or safety certification.
 - Give a price or lead time that is not an operator-issued 3DJ quote.
