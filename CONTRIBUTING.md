@@ -26,6 +26,8 @@ Every pattern in `skills/3dj-make/references/form-cookbook.md` must compile wate
 
 - **Disclose behaviour.** The README's "What this plugin runs, sends and fetches" section must stay complete and true. Any new network destination, download or data sent to 3DJ goes there first.
 - **No scripts or programs.** The directory accepts scripts and files outside its allowed types only from Verified organizations, so the plugin ships none: every build, measurement and render runs on 3DJ's server through its MCP tools.
+- **No install or download-and-run commands**, even in documentation, and no copied script tags that load remote code. The directory holds or refuses such versions from organizations that aren't Verified. Point people to [3dj.app/plugins](https://www.3dj.app/plugins) for setup, and let skills take script addresses from 3DJ's tool results at run time.
+- **`plugin.json` holds only fields in the [manifest reference](https://code.claude.com/docs/en/plugins/manifest-reference)**, plus the listing fields the directory reads (`privacyPolicyUrl`, `icon`). Anything else is reported as an unrecognized field.
 - **No credentials in files**, no reading tokens from the user's environment, no package-manager config files (`.npmrc` and similar).
 - **Files** stay Markdown, text, JSON, YAML, or PNG/JPEG/GIF/WebP/ICO images, UTF-8 with no control characters, each under 256 KiB (images excepted), 512 files at most. No `.DS_Store`, symlinks, submodules or LFS.
 - **Skills describe; they don't steer.** Skills must not tell Claude to call connectors the person didn't ask for, and must not tell it to follow instructions fetched at runtime. Server-provided language notes are reference data.

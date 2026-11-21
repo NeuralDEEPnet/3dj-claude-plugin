@@ -28,36 +28,23 @@ Pick by where the person is. Say which one you used.
 
 **B. A share link.** When the person wants others to use it, ask first, then call `cad_publish_configurator { code, name, parameters?, summary?, ui? }` (needs a 3DJ account). Give them `shareUrl` (`https://www.3dj.app/configurator/<id>`) and `openUrl`. Say plainly that **anyone with the link can open it and see the design**. Unpublished saved models stay private. To reopen one later, call `cad_get_configurator { modelId }`.
 
-**C. A web page to embed or keep.** Write one self-contained HTML page. Use the import map from `cad_get_configurator`'s `cdnImports.importMap` (three.js 0.183, replicad, replicad-opencascadejs and jszip on jsdelivr) and the `<threedj-configurator>` element:
+**C. A web page to embed or keep.** Write one self-contained HTML page from what `cad_get_configurator` returns, so every address and version comes from 3DJ's live answer and none is copied from this skill. The page has four parts:
 
-```html
-<script type="importmap">{ "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.module.js",
-  "three/": "https://cdn.jsdelivr.net/npm/three@0.183.0/",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.183.0/examples/jsm/",
-  "replicad": "https://cdn.jsdelivr.net/npm/replicad@1.1.0/+esm",
-  "replicad-opencascadejs": "https://cdn.jsdelivr.net/npm/replicad-opencascadejs@1.1.0/+esm",
-  "jszip": "https://cdn.jsdelivr.net/npm/jszip@3.10.2/+esm"
-} }</script>
-<script type="module" src="WEB_COMPONENT_URL"></script>
-<threedj-configurator id="cfg" theme="dark" bed="220,220,250" style="display:block;height:560px"></threedj-configurator>
-<script type="module">
-  const cfg = document.getElementById("cfg");
-  cfg.script = SCRIPT_AS_A_JS_STRING;   // or: cfg.setAttribute("model-id", "<published id>")
-  cfg.addEventListener("built", (e) => console.log(e.detail.measuredGeometry));
-</script>
-```
+1. An import map whose content is `cdnImports.importMap`, copied exactly as returned.
+2. One module script whose source is the web component address for where the page will run (below).
+3. A `<threedj-configurator>` element with a `theme` (`dark` or `light`), a `bed` size such as `220,220,250`, and a height set in its style.
+4. A short module script that gives the element the B-Rep source through its `script` property (or a published id through its `model-id` attribute) and listens for its `built` event, whose `detail.measuredGeometry` carries the measurements.
 
-`WEB_COMPONENT_URL` depends on where the page will run:
+Pick the web component address by where the page will run:
 
-- **Claude artifact** (a published page): artifacts can load scripts only from jsdelivr's `/npm/`, unpkg and cdnjs. So use `cdnImports.webComponent`, but only after confirming the package is published: fetch `https://cdn.jsdelivr.net/npm/@neuraldeep/3dj-runtime@0.1.0/package.json`, or run `npm view @neuraldeep/3dj-runtime version`. If it isn't published yet, don't build a broken artifact. Use A or B instead, and say the artifact version needs 3DJ's runtime on npm.
-- **A local file, Claude Code, or the person's own website:** `cdnImports.selfHostedWebComponent` (`https://www.3dj.app/runtime/threedj-configurator.esm.js`) works from any origin.
+- **Claude artifact** (a published page): artifacts load scripts only from jsDelivr's `/npm/`, unpkg and cdnjs, so use `cdnImports.webComponent`. First confirm that 3DJ's runtime package `@neuraldeep/3dj-runtime` is published: look it up on npmjs.com with a web fetch. If it isn't published yet, don't build a broken artifact. Use A or B instead, and say the artifact version needs 3DJ's runtime on npm.
+- **A local file, Claude Code, or the person's own website:** `cdnImports.selfHostedWebComponent`, served by www.3dj.app, works from any origin.
 
 A built page is a file the person keeps. In the Claude app, publish it as an artifact when the runtime is on npm, and otherwise send the HTML file. In Claude Code, write it to their project and give the path.
 
 ## 3 · Hand over
 
 - What the knobs are, with their ranges, plus any knob that animates a joint.
-- Where it lives: inline, `shareUrl` (public to link holders), or the page or artifact. When there is a link, include the embed snippet: `<threedj-configurator model-id="<id>">` with the import map above.
+- Where it lives: inline, `shareUrl` (public to link holders), or the page or artifact. When there is a link, say it can be embedded as a `<threedj-configurator>` element with `model-id` set to that id, built as in C.
 - Files on request. Use `cad_export_model` with the chosen values: `stl`, `stl-fins` for breakaway supports, `step`, `glb` or `zip`. Export links are public to anyone with them. For print checks, use the 3dj-print skill.
 - Honest limits. The live checks are geometry diagnostics, not strength or safety certification, and colours on screen are not material samples.

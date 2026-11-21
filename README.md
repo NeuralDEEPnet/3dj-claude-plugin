@@ -2,9 +2,7 @@
 
 Design and make real, printable objects with Claude. 3DJ Studio connects Claude to [3DJ](https://www.3dj.app), Neural Deep Network Ltd's parametric CAD workbench. 3DJ builds, measures and renders every model on its own servers — so each step is something you can see, not a description, and nothing is installed or run on your machine.
 
-```bash
-/plugin install 3dj-studio --marketplace NeuralDEEPnet/3dj-claude-plugin
-```
+Add 3DJ Studio from the Claude directory under **Customize → Plugins**, then connect its **3dj** connector on the plugin's Connectors tab and sign in to 3DJ when asked. Setup steps for Claude Code, Cowork and the stand-alone 3dj connector are on [3dj.app/plugins](https://www.3dj.app/plugins).
 
 ## What you can ask
 

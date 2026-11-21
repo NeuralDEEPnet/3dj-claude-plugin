@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.1 — 2026-11-21
+
+Fixes the Claude directory's findings on 0.11.0.
+
+- `plugin.json`: removed `documentationUrl`, `supportUrl` and `termsOfServiceUrl`, which Claude Code doesn't recognise. `homepage` remains the documentation link, and the README links support and terms. `privacyPolicyUrl` and `icon` stay because the directory reads them for the listing.
+- README: the install command is replaced by where to add the plugin in Claude, with setup steps for Claude Code and Cowork at 3dj.app/plugins.
+- `3dj-configurator`: the embeddable page is described from the `cdnImports` values that `cad_get_configurator` returns, instead of a copied HTML block with hard-coded script addresses. The npm command is replaced by a web lookup of the runtime package. Behaviour is unchanged.
+
 ## 0.11.0 — 2026-11-08
 
 - Removed the local bench (`skills/3dj-make/scripts/bench.mjs`) and `assets/icon.svg`. The Claude directory accepts scripts and files outside its allowed types only from Verified organizations, so the plugin now ships only Markdown, JSON, YAML and the PNG icon, and runs nothing on the person's machine.
