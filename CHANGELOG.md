@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.2 — 2026-11-21
+
+Clears the last unrecognized-field finding from the Claude directory review.
+
+- `plugin.json`: removed `displayName`, which isn't in the manifest reference and was the fourth unrecognized field the directory reported on 0.11.0. The listing uses `name`; the README title still reads "3DJ Studio". Behaviour is unchanged.
+
 ## 0.11.1 — 2026-11-21
 
 Fixes the Claude directory's findings on 0.11.0.
