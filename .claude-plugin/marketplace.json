@@ -12,7 +12,7 @@
       "name": "3dj-studio",
       "source": "./",
       "description": "3DJ as the live CAD studio of the Neuraldeep Design Studio: make printable parts, design objects through compared concepts, and get parts print-ready, with every model built, measured and rendered on 3DJ.",
-      "version": "0.11.2"
+      "version": "0.11.3"
     }
   ]
 }

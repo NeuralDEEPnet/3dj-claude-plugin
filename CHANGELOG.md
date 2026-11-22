@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.3 — 2026-11-22
+
+- `plugin.json`: restored `displayName: "3DJ Studio"`. It is a documented manifest field ("Name shown in UI in place of `name`", [manifest reference](https://code.claude.com/docs/en/plugins/manifest-reference#displayname)), so 0.11.2 shouldn't have removed it. Without it, Claude shows the plugin as `3dj-studio`. The fourth unrecognized field the directory reported on 0.11.0 was `privacyPolicyUrl`, which the finding itself names as a listing field to keep.
+
 ## 0.11.2 — 2026-11-21
 
 Clears the last unrecognized-field finding from the Claude directory review.
