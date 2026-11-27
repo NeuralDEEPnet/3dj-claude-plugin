@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.11.4 — 2026-11-27
+
+- `plugin.json`: restored `displayName: "3DJ Studio"`. It is a documented manifest field ("Name shown in UI in place of `name`", [manifest reference](https://code.claude.com/docs/en/plugins/manifest-reference#displayname)), so 0.11.2 shouldn't have removed it. Without it, Claude shows the plugin as `3dj-studio`. The fourth unrecognized field the directory reported on 0.11.0 was `privacyPolicyUrl`, which the finding itself names as a listing field to keep.
+
+## 0.11.3 — 2026-11-27
+
+Keeps the plugin to its own connector, for the Claude directory's policy review.
+
+- Skills and the tool reference no longer describe a third route to 3DJ through another connector's gateway tools. 3DJ is reached through this plugin's `3dj` server or the Claude app's 3dj connector, which matches the README's promise of no other network destinations.
+- `3dj-design` no longer tells Claude to follow another plugin's skills, and the README no longer points to another marketplace to install from.
+- CONTRIBUTING: a rule for both. Behaviour is otherwise unchanged.
+
 ## 0.11.2 — 2026-11-21
 
 Clears the last unrecognized-field finding from the Claude directory review.
