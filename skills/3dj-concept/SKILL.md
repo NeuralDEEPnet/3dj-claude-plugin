@@ -7,7 +7,7 @@ description: Generate an organic or sculptural 3D concept mesh with 3DJ from a t
 
 Concept meshes are for look, feel and silhouette: fast, expressive, non-parametric GLB files without reliable real-world units. They are not for fit-critical parts. When the request needs measured interfaces (a socket, a mount, a lid), use 3dj-make for that part and treat the concept as the decorative element.
 
-The 3DJ tools may appear under several names: from this plugin's `3dj` server, from the 3dj connector in Claude, or through the Adaptive gateway (`adaptive_proxy_mcp_tool` with `app: "3dj"`). Use whichever is present; the arguments are the same (`../3dj-make/references/tools.md`).
+The 3DJ tools come from this plugin's `3dj` server, or from the 3dj connector in Claude when the person added that instead; the arguments are the same (`../3dj-make/references/tools.md`).
 
 Tell the person once, before the first generation, how it works: text-to-3D first has 3DJ create one AI reference image from the prompt, then reconstructs a mesh from it; image-to-3D reconstructs from their image. Both run on 3DJ's servers and use the account's generation allowance.
 

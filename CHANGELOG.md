@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.3 — 2026-11-27
+
+Keeps the plugin to its own connector, for the Claude directory's policy review.
+
+- Skills and the tool reference no longer describe a third route to 3DJ through another connector's gateway tools. 3DJ is reached through this plugin's `3dj` server or the Claude app's 3dj connector, which matches the README's promise of no other network destinations.
+- `3dj-design` no longer tells Claude to follow another plugin's skills, and the README no longer points to another marketplace to install from.
+- CONTRIBUTING: a rule for both. Behaviour is otherwise unchanged.
+
 ## 0.11.2 — 2026-11-21
 
 Clears the last unrecognized-field finding from the Claude directory review.

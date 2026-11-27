@@ -13,7 +13,7 @@ Every build, measurement and picture comes from 3DJ's own server. Nothing is ins
 
 - **Free, no sign-in** (throttled per conversation): `cad_get_starters`, `cad_validate_script` (with `preview: true` for a picture), `cad_render_views`, `cad_check_assembly`, `cad_compare_revisions`, `cad_get_evidence_schema`, `openscad_get_starters`.
 - **With a 3DJ account**: `openscad_compile_model`, `cad_export_model` (real STL, STEP, GLB files), `cad_save_model`, `cad_export_drawing`, `cad_import_model` and the rest.
-- Names, routes (plugin server, Claude app connector, Adaptive gateway), limits and sign-in: `references/tools.md`.
+- Names, routes (this plugin's server or the Claude app's 3dj connector), limits and sign-in: `references/tools.md`.
 - **No 3DJ tools reachable at all**: write the source carefully, say plainly that it has not been built or checked, and give the person the 3DJ workbench step (`https://www.3dj.app/workspace`).
 
 ## 1 · Pin the part down (fast)

@@ -49,10 +49,6 @@ Every check follows the 3DJ Design Evidence Pack v1 gates: watertight, 0.8 mm no
 
 Data sent to the 3DJ service is covered by the [3DJ privacy policy](https://www.3dj.app/privacy) (Neural Deep Network Ltd, 3d@neuraldeep.net). 3DJ refuses credentials and sensitive personal data in tool arguments.
 
-## Works with the Design Studio
-
-Install alongside `neuraldeep-design-studio` from the [Neuraldeep Design Studio marketplace](https://github.com/NeuralDEEPnet/claude-design-skills). Its `3d-object-design` and `design-director` skills run the full studio process; 3DJ Studio supplies the modelling, comparison and print stages.
-
 ## Boundaries
 
 Quote tools create review requests and record acceptance of operator-issued terms only, after you confirm: no payment, print booking or shipping happens through this plugin. Bench and 3DJ checks do not certify strength, safety or manufacturability.
