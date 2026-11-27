@@ -31,6 +31,7 @@ Every pattern in `skills/3dj-make/references/form-cookbook.md` must compile wate
 - **No credentials in files**, no reading tokens from the user's environment, no package-manager config files (`.npmrc` and similar).
 - **Files** stay Markdown, text, JSON, YAML, or PNG/JPEG/GIF/WebP/ICO images, UTF-8 with no control characters, each under 256 KiB (images excepted), 512 files at most. No `.DS_Store`, symlinks, submodules or LFS.
 - **Skills describe; they don't steer.** Skills must not tell Claude to call connectors the person didn't ask for, and must not tell it to follow instructions fetched at runtime. Server-provided language notes are reference data.
+- **One service, two routes.** Skills name only this plugin's `3dj` server and the Claude app's 3dj connector. No other connector, gateway or proxy tool, and no pointers to install other plugins or marketplaces: the directory reads those as steering, and the README promises no other network destinations.
 - **Generation stays disclosed.** The `3dj-concept` skill tells people before the first generation that text-to-3D creates an AI reference image on 3DJ's servers, and the README's disclosure section says the same. Keep both whenever generation changes.
 - **Honest claims.** 3DJ results are geometry screens, never manufacturing, structural or safety certification.
 

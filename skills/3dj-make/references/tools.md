@@ -4,13 +4,12 @@ Verified against the live 3DJ MCP server on 6 November 2026 (version 1.5.0; 32 t
 
 ## How the tools appear
 
-The same tools can reach this session three ways. Use whichever is present; the arguments are identical.
+The tools reach this session in one of two ways, depending on how the person added 3DJ. The arguments are identical.
 
 | Route | Tool names look like | Notes |
 |---|---|---|
 | This plugin's `3dj` server (Claude Code) | `mcp__plugin_3dj-studio_3dj__openscad_compile_model` | Sign in once: run `/mcp`, choose **3dj**, **Authenticate**. |
 | Claude app connector "3dj" | `mcp__3dj__openscad_compile_model` | Sign in under Settings → Connectors → 3dj. |
-| Adaptive gateway | `threedj_cad_and_print` with `operation`, or `adaptive_proxy_mcp_tool` with `app: "3dj"`, `action: "call_tool"`, `toolName`, `arguments` | The shortcut covers starters, validation, compile, saved CAD models, account and quotes; use the proxy for generation and the rest. |
 
 Tool calls may be deferred: load them through the session's tool search before the first call.
 
