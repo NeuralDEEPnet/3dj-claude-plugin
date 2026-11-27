@@ -5,7 +5,7 @@ description: Design a physical object end to end with 3DJ as the live CAD kernel
 
 # 3DJ Design — concepts you can see, compare and print
 
-Work like a studio: decide what the object must do and be, explore genuinely different answers as real models, choose with evidence, then make it real. If the Neuraldeep Design Studio skills are installed (`3d-object-design`, `design-core`, `design-director`), follow their process, templates and depth modes and use this skill for the modelling, comparison and print stages. Otherwise follow the compact flow below.
+Work like a studio: decide what the object must do and be, explore genuinely different answers as real models, choose with evidence, then make it real. When the person is already working through a wider design process, this skill supplies its modelling, comparison and print stages. Otherwise follow the compact flow below.
 
 Every model is built, measured and rendered by 3DJ's own tools; nothing runs on the person's machine. Modelling rules: `../3dj-make/references/brep-cad.md`; tools and limits: `../3dj-make/references/tools.md`; print rules: `../3dj-make/references/dfam.md`.
 
