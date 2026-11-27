@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.12.0 — 2026-11-27
+
+Closes the gaps found in end-to-end tests with the plugin loaded.
+
+- New `3dj-start` skill: the front door for overview questions about 3DJ and 3dj.app (what it can make, where to start, account and limits). It answers in about one screen, offers the three or four workflows that fit, and routes to the other `3dj-*` skills by name. It says that 3DJ is a CAD tool, not a music or DJ app.
+- `3dj-make`: the description now covers assembly fit, clearance, interference and moving-joint questions. A new section runs `cad_check_assembly`, names the joint parameter to sweep in `jointParams`, and states that the result is a rigid geometric check: no flex, friction, print tolerance or load.
+- `3dj-print`: every print-readiness answer ends with one line telling the person to check the sliced preview and print a test piece before relying on the part. When the person names a printer or bed size, the bed-fit check uses that size (passed as `buildVolumeMm` where the tool takes one) instead of the default 220 × 220 × 250 mm.
+- All skills: never refer to "the renders above" or to images the person may not see; describe what the views show instead.
+- `3dj-start` and `3dj-make`: decline weapons, weapon parts and accessories, and parts meant to defeat locks or safety devices, in one or two lines.
+- README: `3dj-start` in both tables.
+- Evals: trigger cases for the overview question (`3dj-start`) and the hinge clearance question (`3dj-make`).
+
 ## 0.11.2 — 2026-11-21
 
 Clears the last unrecognized-field finding from the Claude directory review.

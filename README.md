@@ -8,6 +8,7 @@ Add 3DJ Studio from the Claude directory under **Customize → Plugins**, then c
 
 | Say | Claude does |
 |---|---|
+| `/3dj-start` "What can 3DJ make for me?" | A one-screen overview of what 3DJ does, the workflows that fit what you said, what needs an account, and which skill to use next |
 | `/3dj-make` "A wall bracket that holds a 25 mm pipe 30 mm off the wall, two M4 screws, printed in PETG." | Writes a parametric model, builds and measures it in 3DJ, checks it against the 3DJ print gates, shows rendered views with thin-wall and overhang highlights, and hands over the source and (with an account) STL or STEP files with named knobs |
 | `/3dj-design` "A desk headphone stand that feels premium — show me some directions first." | Brief → design DNA → three structurally different directions rendered the same way, measured, and shown with a stand-in of the headphones → critique → development → printable handoff |
 | `/3dj-print` "Will this STL fit my Prusa MINI, and how should I orient it?" | Watertight, wall, overhang and bed checks, the best orientation, slicer starting points, and — on request — a 3DJ operator print quote review |
@@ -21,7 +22,8 @@ Skills also start on their own when a request matches.
 | Component | Purpose |
 |---|---|
 | `3dj` MCP server | The 3DJ service (`https://www.3dj.app/api/mcp`, 32 tools): OpenSCAD and B-Rep CAD starters, script validation with rendered views, assembly interference and joint checks, revision comparisons, live configurators, STL/STEP/GLB export, A4 drawings (PDF/SVG/DXF), gallery saves with revision history, STEP/STL/GLB import as reference geometry, a private feature library and review comments, print quote requests, text- and image-to-3D generation |
-| `3dj-make` skill | Functional printable parts; holds the shared references (3DJ tools, B-Rep CAD, OpenSCAD rules, print gates, form cookbook) |
+| `3dj-start` skill | The front door: what 3DJ can do, where to start, account and limits; routes to the skills below |
+| `3dj-make` skill | Functional printable parts, with assembly fit, clearance and moving-joint checks; holds the shared references (3DJ tools, B-Rep CAD, OpenSCAD rules, print gates, form cookbook) |
 | `3dj-design` skill | The studio flow with compared directions |
 | `3dj-print` skill | Print-readiness, orientation and operator quote reviews |
 | `3dj-configurator` skill | Live three.js product configurators from a parametric model: inline, share link or embeddable page |

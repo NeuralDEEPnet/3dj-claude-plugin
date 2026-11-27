@@ -38,4 +38,5 @@ One object, whole and centred, nothing else. Lead with silhouette and proportion
 - The download link, and the viewer link: `https://www.3dj.app/workspace?modelUrl=<URL-encoded downloadUrl>`.
 - To check it for printing, the 3dj-print skill can import the mesh into 3DJ (`cad_import_model` with the `downloadUrl`) and render the thin-wall and overhang views. Generated meshes are often not watertight; report what the check found instead of assuming. Otherwise say the preview is in the workbench link.
 - Say what it is: a concept mesh (GLB), unitless until scaled, not a parametric or print-certified part. `refinementHandoff`, when returned, tells the workbench how to continue refining it.
+- Never refer to "the renders above" or to images the person may not see; describe what the views show instead.
 - Next moves: scale it to size, generate a variant (change one thing in the prompt), add a measured base or mount with 3dj-make, or check printing with 3dj-print.

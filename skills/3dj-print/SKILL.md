@@ -9,6 +9,12 @@ Two separate jobs. Part A is free and always available. Part B needs a signed-in
 
 Every check runs on 3DJ's own tools; nothing runs on the person's machine. Rules and fixes: `../3dj-make/references/dfam.md`. Tools: `../3dj-make/references/tools.md`.
 
+## Rules for every print-readiness answer
+
+- **Use the person's bed.** When they name a printer or a bed size, the bed-fit check uses that size, never the default 220 × 220 × 250 mm. Pass it as the build volume where the tool takes one (`buildVolumeMm: [x, y, z]` on `openscad_compile_model`). `cad_validate_script` reports bed fit against the default bed, so for B-Rep and imported models compare the measured size from `measuredGeometry` with the named bed yourself, including the part turned 90° and the Z height, and report that result instead of the tool's default verdict. State the bed size used. For a printer not listed below, ask for its bed size or state the size assumed.
+- **End with the test line.** Every print-readiness answer ends with one line telling the person to check the sliced preview and print a test piece before relying on the part — for example: "Before relying on it, check the sliced preview in your slicer and print a small test piece."
+- Never refer to "the renders above" or to images the person may not see; describe what the views show instead.
+
 ## A · Print-readiness
 
 1. **Get the geometry into 3DJ**:
@@ -17,10 +23,10 @@ Every check runs on 3DJ's own tools; nothing runs on the person's machine. Rules
    - An STL, STEP or GLB file, by public URL or as a file under 20 MB (account): `cad_import_model` stores it privately and returns a `modelId`, its bodies and bounding box. Check it through a one-line script that returns `importedModel("<modelId>")`.
    - OpenSCAD source (account): `openscad_compile_model` with `buildVolumeMm` for the closed-mesh check and printer fit; numbers only.
 2. **Get the printer**: bed size, nozzle, material. Assume FDM, 0.4 mm, PLA or PETG, 220 × 220 × 250 mm when unknown, and say so. Common beds: Prusa MINI 180 × 180 × 180, Prusa MK4 250 × 210 × 220, Bambu A1 mini 180³, Bambu A1 / X1 / P1 256³.
-3. **Check**: `cad_validate_script` for size, mass, closed bodies and bed fit, then `cad_render_views` with `highlight: "thin-walls"` and again with `highlight: "overhangs"`. For a multi-part model, check each part on its own.
+3. **Check**: `cad_validate_script` for size, mass, closed bodies and bed fit (against the person's bed when one is named — see the rules above), then `cad_render_views` with `highlight: "thin-walls"` and again with `highlight: "overhangs"`. For a multi-part model, check each part on its own.
 4. **Orient**: render the overhang highlight for two or three candidate poses (rotate the part in the script) and pick the one with the least support, a flat face on the bed and a sensible height. Then apply judgement the renders cannot: layer lines along the main load path, cosmetic face on the bed or facing up, small footprints that need a brim. For a B-Rep part, `cad_export_model` with `format: "stl-fins"` and `supportFins` can bake the pose and breakaway supports into the STL (account).
 5. **Fix list**: every problem paired with a concrete change — "wall near [12, 40, 18] is 0.9 mm → set `wall = 1.6`", "flat ceiling at z 22 → 45° chamfer", "does not fit 180 mm bed → split along the back plane with two 4 mm pins". When the source is ours, make the change and re-run the check.
-6. **Deliver**: the check images, the chosen orientation, the fix list, the exported STL when one was made, and slicer starting points from `dfam.md` — stated as starting points. Solid mass from `measuredGeometry` is an upper bound; a sliced part is lighter.
+6. **Deliver**: the check images, the chosen orientation, the fix list, the exported STL when one was made, and slicer starting points from `dfam.md` — stated as starting points. Solid mass from `measuredGeometry` is an upper bound; a sliced part is lighter. Close with the test line from the rules above.
 
 ## B · 3DJ operator quote (review only)
 

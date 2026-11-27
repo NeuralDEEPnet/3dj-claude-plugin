@@ -47,4 +47,5 @@ A built page is a file the person keeps. In the Claude app, publish it as an art
 - What the knobs are, with their ranges, plus any knob that animates a joint.
 - Where it lives: inline, `shareUrl` (public to link holders), or the page or artifact. When there is a link, say it can be embedded as a `<threedj-configurator>` element with `model-id` set to that id, built as in C.
 - Files on request. Use `cad_export_model` with the chosen values: `stl`, `stl-fins` for breakaway supports, `step`, `glb` or `zip`. Export links are public to anyone with them. For print checks, use the 3dj-print skill.
+- Never refer to "the renders above", "the configurator above" or images the person may not see; describe what the views show instead.
 - Honest limits. The live checks are geometry diagnostics, not strength or safety certification, and colours on screen are not material samples.

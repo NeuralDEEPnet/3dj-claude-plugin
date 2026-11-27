@@ -18,5 +18,11 @@
  {"query": "design a wall bracket for a 25mm pipe", "skill": "3dj-concept", "should_trigger": false},
  {"query": "make a configurator for this phone stand so customers can pick the phone width and tilt angle", "skill": "3dj-configurator", "should_trigger": true},
  {"query": "I want an interactive 3D model with sliders on my shop page for this planter", "skill": "3dj-configurator", "should_trigger": true},
- {"query": "check if this STL fits my Prusa MINI bed", "skill": "3dj-configurator", "should_trigger": false}
+ {"query": "check if this STL fits my Prusa MINI bed", "skill": "3dj-configurator", "should_trigger": false},
+ {"query": "What can 3dj make for me?", "skill": "3dj-start", "should_trigger": true},
+ {"query": "do I need an account to use 3dj.app, and what are the limits?", "skill": "3dj-start", "should_trigger": true},
+ {"query": "what's a good DJ app for mixing two tracks?", "skill": "3dj-start", "should_trigger": false},
+ {"query": "can you make me a wall bracket for a 25mm pipe that I can print? two M4 screws", "skill": "3dj-start", "should_trigger": false},
+ {"query": "Does the lid of the hinged lid enclosure starter hit the base when it opens?", "skill": "3dj-make", "should_trigger": true},
+ {"query": "check the clearance between the gear and the housing, do they interfere anywhere in the rotation?", "skill": "3dj-make", "should_trigger": true}
 ]

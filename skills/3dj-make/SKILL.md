@@ -1,6 +1,6 @@
 ---
 name: 3dj-make
-description: Make a functional, 3D-printable part with 3DJ — brackets, mounts, enclosures, cases, holders, stands, adapters, knobs, organisers, jigs and replacement parts. Writes a parametric model, builds and measures it in 3DJ's CAD kernel, looks at real rendered views and print-check highlights, fixes problems, and hands over the files with named knobs to adjust. Use for "make me a bracket for…", "design a case for this PCB", "I need a replacement knob, 22 mm shaft", "model a phone stand I can print", "turn these measurements into a part", or any printable object with real dimensions. For a product designed through compared concepts use 3dj-design.
+description: Make a functional, 3D-printable part with 3DJ — brackets, mounts, enclosures, cases, holders, stands, adapters, knobs, organisers, jigs and replacement parts. Writes a parametric model, builds and measures it in 3DJ's CAD kernel, looks at real rendered views and print-check highlights, fixes problems, and hands over the files with named knobs to adjust. Use for "make me a bracket for…", "design a case for this PCB", "I need a replacement knob, 22 mm shaft", "model a phone stand I can print", "turn these measurements into a part", or any printable object with real dimensions. Also checks how the parts of an assembly fit and move with cad_check_assembly — clearance, interference, collisions, and hinges, lids, slides or gears swept through their travel: "does the lid hit the base when it opens?", "do these parts collide?", "is there enough clearance?", "check the hinged lid enclosure starter". For a product designed through compared concepts use 3dj-design.
 ---
 
 # 3DJ Make — a printable part, measured and seen
@@ -43,15 +43,24 @@ Every build, measurement and picture comes from 3DJ's own server. Nothing is ins
 1. `cad_validate_script { code, parameters, preview: true }`. Read `buildValidation` and `measuredGeometry` (bodies, size, volume, mass, closed, bed fit, checks). Fix any failure before showing anything.
 2. **Look** at the preview image properly: does it match the brief, are the proportions right, do holes go through, are parts separate, is anything floating or fused that should not be? Fix and rebuild. The person should see a good version first, not the first version.
 3. **Print check**: `cad_render_views { code, parameters, views: ["iso", "front", "right"], highlight: "thin-walls" }`, then again with `highlight: "overhangs"`. Use `style: "section"` with a `sectionPlane` to see inside walls and bores. Fix thin walls and large unsupported overhangs (45° chamfer instead of a bottom fillet, teardrop holes, a flat underside) — see `references/dfam.md`.
-4. Parts that meet or move: `cad_check_assembly`. Fix any interference before showing the assembly.
+4. Parts that meet or move: `cad_check_assembly` (see "Fit, clearance and moving joints" below). Fix any interference before showing the assembly.
 5. To show what a change did, or to compare two values of one parameter: `cad_compare_revisions` with `before` and `after` returns the deltas and an overlay image.
 6. **OpenSCAD source**: with an account, `openscad_compile_model { code, parameters, buildVolumeMm }` for the compile, closed-mesh check and printer fit. It returns numbers only, so say that no picture exists yet and offer the workbench to see it.
 
 These builds are throttled without sign-in (`references/tools.md`): on `rate_limited`, wait the given time and don't loop. Suggest signing in for long sessions.
 
+### Fit, clearance and moving joints
+
+For "does the lid hit the base when it opens?", "do these collide?" or "is there enough clearance?" — about our part, a saved model, or a starter such as the hinged-lid enclosure (`cad_get_starters` with `category: "hinge"`):
+
+1. Call `cad_check_assembly { code, parameters }` (or `{ modelId }` for a saved model). It reports pairwise interference volumes, the minimum surface clearance, and collisions as each `placeAt` joint is swept across its declared `Param` range.
+2. **Name the joint parameter to sweep** in `jointParams`: the `Param` that drives the joint's `angle` or `offset` — for the hinged-lid enclosure, the lid's opening-angle parameter. Read its exact name from the script's `Param` declarations instead of guessing it. Raise `sweepSteps` (3–15) when a collision could fall between coarse steps.
+3. Answer the question first: yes or no, which two parts, at which value of the joint parameter, how much interference, and the minimum clearance elsewhere in the travel. Then the fix (more hinge offset, a relief chamfer on the lid's back edge, a narrower `Param` range) and a re-run.
+4. Say what the check is: **a rigid geometric check of the modelled shapes**. It does not account for flex, friction, print tolerance or load, so a small clearance can still bind on a real print. Suggest a short test print of the joint when the margin is thin.
+
 ## 5 · Show it and hand it over
 
-Lead with the rendered image — it is the answer. Then, briefly:
+Lead with the rendered image — it is the answer. Never refer to "the renders above" or to images the person may not see; describe what the views show instead. Then, briefly:
 
 - **Files**: the source file (the source of truth) and the images. With an account, `cad_export_model` writes the real STL, STEP or GLB (say that its links work for anyone holding them). Without one, the person pastes the script into `https://www.3dj.app/workspace` and exports there. Never say a file exists until a download URL came back or the person has exported it.
 - **Knobs** — a small table the person can act on by name:
@@ -75,3 +84,7 @@ Map plain requests to parameters ("wider" → `Width`), change the default in th
 - 3DJ's checks are geometry screens against the 3DJ gates, not manufacturing, structural, food-contact or safety certification. Say which checks ran; never just "print-ready".
 - Never claim a STEP or STL exists until it has been written, or that 3DJ built something unless the tool returned a result.
 - Never ask for API keys or tokens in chat, and never put credentials in tool arguments.
+
+## Boundaries
+
+Decline weapons, weapon parts and weapon accessories (suppressors, receivers, magazines and the like), and parts meant to defeat locks or safety devices. Do it in one or two lines, with no legal commentary and no "prop" or look-alike alternative, then offer to help with something else.
